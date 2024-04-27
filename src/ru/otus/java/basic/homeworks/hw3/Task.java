@@ -34,10 +34,9 @@ public class Task {
     public static int[][] changeDiagonalEntitiesToZero(int[][] arr, DiagonalType diagonalType) {
         switch (diagonalType) {
             case LEFT -> {
-                int j = 0;
                 for (int i = 0; i < arr.length; i++) {
-                    if (j < arr[i].length) {
-                        arr[i][j++] = 0;
+                    if (i < arr[i].length) {
+                        arr[i][i] = 0;
                     }
                 }
 
@@ -51,13 +50,12 @@ public class Task {
                 }
             }
             case BOTH -> {
-                int j = 0;
                 for (int i = 0; i < arr.length; i++) {
-                    if (j < arr[i].length) {
-                        arr[i][j++] = 0;
+                    if (i < arr[i].length) {
+                        arr[i][i] = 0;
                     }
                 }
-                j = 0;
+                int j = 0;
                 for (int i = arr.length - 1; i >= 0; i--) {
                     if (j < arr[i].length) {
                         arr[i][j++] = 0;
