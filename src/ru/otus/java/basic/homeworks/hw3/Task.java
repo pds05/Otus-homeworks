@@ -76,7 +76,6 @@ public class Task {
                     maxNum = array[i][j];
                 }
             }
-
         }
         return maxNum;
     }
@@ -98,10 +97,9 @@ public class Task {
         int sum = 0;
         if (arr.length < 2 || arr[1].length == 0) {
             return -1;
-        } else {
-            for (int i = 0; i < arr[1].length; i++) {
-                sum += arr[1][i];
-            }
+        }
+        for (int i = 0; i < arr[1].length; i++) {
+            sum += arr[1][i];
         }
         return sum;
     }
