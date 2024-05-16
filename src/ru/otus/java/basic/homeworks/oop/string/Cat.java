@@ -32,23 +32,31 @@ public class Cat {
     }
 
     public boolean eat(Plate plate) {
-        if(plate.takeFood(appetite)){
-            satiety = true;
-            System.out.println("Кот " + name + " наелся!");
-            return true;
+        if (plate == null) {
+            throw new RuntimeException("Коту нужна тарелка с едой");
         }
-        System.out.println("Коту "+ name +" не хватает еды");
-        return false;
+        if (satiety) {
+            System.out.println("Кот " + name + "сыт и есть не хочет");
+            return false;
+        }
+        if (!plate.takeFood(appetite)) {
+            System.out.println("Кот " + name + " не смог поесть");
+            return false;
+        }
+        satiety = true;
+        System.out.println("Кот " + name + " наелся!");
+        return true;
     }
 
-    public static int createAppetite(){
+    public static int createAppetite() {
         return (int) (Math.random() * MAX_APPETITE + 1);
 
     }
 
-    public void info(){
-        System.out.println(toString());
+    public void info() {
+        System.out.println(this);
     }
+
     @Override
     public String toString() {
         return "Cat{" +

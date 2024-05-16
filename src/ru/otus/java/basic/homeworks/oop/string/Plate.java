@@ -4,7 +4,6 @@ public class Plate {
     private int plateSize;
     private int maxFoodSize;
     private int currentFoodSize;
-    private boolean empty;
 
     public Plate(int plateSize) {
         this.plateSize = plateSize;
@@ -30,22 +29,24 @@ public class Plate {
             return;
         }
         currentFoodSize += size;
-        empty = false;
         System.out.println("Тарелка наполнена едой: уровень еды=" + currentFoodSize + ", размер тарелки=" + plateSize);
     }
 
     public boolean takeFood(int size) {
-        if (empty || currentFoodSize < size) {
+        if (size <= 0) {
+            System.out.println("Не стесняйся, возьми хоть что-нибудь!");
+            return false;
+        }
+        if (currentFoodSize < size) {
             System.out.println("Не хватает еды в тарелке");
             return false;
         }
         currentFoodSize -= size;
-        if(currentFoodSize == 0) empty = true;
         return true;
     }
 
     public void info(){
-        System.out.println(toString());
+        System.out.println(this);
     }
 
     @Override
@@ -54,7 +55,6 @@ public class Plate {
                 "plateSize=" + plateSize +
                 ", maxFoodSize=" + maxFoodSize +
                 ", currentFoodSize=" + currentFoodSize +
-                ", empty=" + empty +
                 '}';
     }
 }
