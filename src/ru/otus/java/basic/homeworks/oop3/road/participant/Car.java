@@ -33,6 +33,7 @@ public class Car extends AutoCommon {
     }
 
     public void info() {
+        System.out.println(this);
     }
 
     @Override
