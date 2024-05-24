@@ -4,7 +4,6 @@ import ru.otus.java.basic.homeworks.oop3.road.common.AutoCommon;
 import ru.otus.java.basic.homeworks.oop3.road.common.Location;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 public class Car extends AutoCommon {
     public static final int AVERAGE_FUEL_CONSUMPTION = 10;
@@ -34,15 +33,15 @@ public class Car extends AutoCommon {
     }
 
     public void info() {
-        System.out.println(this);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Car.class.getSimpleName() + "[", "]")
-                .add("maxFuel=" + maxFuel)
-                .add("currentFuel=" + currentFuel)
-                .add("invalidLocations=" + Arrays.toString(invalidLocations))
-                .toString();
+        return "Car{" +
+                "driver=" + ((driver == null) ? null : driver.getName()) +
+                ", maxFuel=" + maxFuel +
+                ", currentFuel=" + currentFuel +
+                ", invalidLocations=" + Arrays.toString(invalidLocations) +
+                '}';
     }
 }

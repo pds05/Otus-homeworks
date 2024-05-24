@@ -5,7 +5,7 @@ public interface Driver {
 
     boolean takeTransport(Transport transport);
 
-    void releaseTransport();
+    Transport releaseTransport();
 
     Transport getCurrentTransport();
 

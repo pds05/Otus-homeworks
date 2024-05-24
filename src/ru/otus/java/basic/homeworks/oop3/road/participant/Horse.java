@@ -1,16 +1,18 @@
 package ru.otus.java.basic.homeworks.oop3.road.participant;
 
+import ru.otus.java.basic.homeworks.oop3.road.common.Location;
 import ru.otus.java.basic.homeworks.oop3.road.common.RoadUserCommon;
 import ru.otus.java.basic.homeworks.oop3.road.common.Runner;
-import ru.otus.java.basic.homeworks.oop3.road.common.Location;
 import ru.otus.java.basic.homeworks.oop3.road.common.Transport;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
+import java.util.Objects;
 
 public class Horse extends RoadUserCommon implements Transport, Runner {
     public static final int RUNNING_ENDURANCE_COST = 2;
     private int energy;
+
+    private Human driver;
 
     public Horse(int energy) {
         super(new Location[]{Location.SWAMP});
@@ -67,15 +69,68 @@ public class Horse extends RoadUserCommon implements Transport, Runner {
         return true;
     }
 
+    @Override
+    public boolean setDriver(Human human) {
+        if(human == null) {
+            System.out.println("Лошади нужен наездник");
+            return false;
+        }
+        if (human.equals(driver)) {
+            System.out.println(human.getName() + " уже верхом на лошади");
+            return false;
+        }
+        if(human.getCurrentTransport() != null) {
+            System.out.println(human.getName() + " уже управляет транспортом=" + human.getCurrentTransport());
+            return false;
+        }
+        if (driver != null) {
+            System.out.println("Лошадь занята другим наездником");
+            return false;
+        }
+        driver = human;
+        System.out.println("Лошадь оседлал " + human.getName());
+        return true;
+    }
+
+    @Override
+    public Human releaseDriver() {
+        if(driver == null) {
+            System.out.println("Лошадь уже свободна");
+            return null;
+        }
+        Human human = driver;
+        driver = null;
+        System.out.println("Лошадь освободил наездник " + human.getName());
+        return human;
+    }
+
+    @Override
+    public Human getDriver() {
+        return driver;
+    }
+
     public void info() {
         System.out.println(this);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Horse.class.getSimpleName() + "[", "]")
-                .add("energy=" + energy)
-                .add("invalidLocations=" + Arrays.toString(invalidLocations))
-                .toString();
+        return "Horse{" +
+                "energy=" + energy +
+                ", driver=" + ((driver==null) ? null : driver.getName()) +
+                ", invalidLocations=" + Arrays.toString(invalidLocations) +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Horse horse)) return false;
+        return energy == horse.energy && Objects.equals(driver, horse.driver);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(energy, driver);
     }
 }

@@ -3,7 +3,7 @@ package ru.otus.java.basic.homeworks.oop3.road.participant;
 import ru.otus.java.basic.homeworks.oop3.road.common.*;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
+import java.util.Objects;
 
 public class Human extends RoadUserCommon implements Driver, Runner {
     public static final int RUNNING_ENDURANCE_COST = 25;
@@ -47,6 +47,7 @@ public class Human extends RoadUserCommon implements Driver, Runner {
         }
         if (power > energy) {
             System.out.println("Это непосильная работа для " + name);
+            return false;
         }
         energy -= power;
         System.out.printf("%s совершил работу, потрачено сил=%d, осталось сил=%d\n", name, power, energy);
@@ -64,15 +65,31 @@ public class Human extends RoadUserCommon implements Driver, Runner {
             System.out.println(name + " не получил транспорт");
             return false;
         }
+        if (transport.equals(currentTransport)) {
+            System.out.printf("%s уже сидит в транспорте=%s\n", name, currentTransport);
+            return false;
+        }
+        if (currentTransport != null) {
+            System.out.printf("%s сейчас находится в другом транспорте=%s\n", name, currentTransport);
+            return false;
+        }
+        transport.setDriver(this);
         this.currentTransport = transport;
         System.out.println(name + " взял транспорт=" + transport);
         return true;
     }
 
     @Override
-    public void releaseTransport() {
+    public Transport releaseTransport() {
+        if (currentTransport == null) {
+            System.out.println(name + " не управляет транспортом");
+            return null;
+        }
+        Transport transport = currentTransport;
+        transport.releaseDriver();
         currentTransport = null;
-        System.out.println(name + " покинул транспорт");
+        System.out.println(name + " покинул транспорт=" + transport);
+        return transport;
     }
 
     @Override
@@ -122,12 +139,24 @@ public class Human extends RoadUserCommon implements Driver, Runner {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Human.class.getSimpleName() + "[", "]")
-                .add("name='" + name + "'")
-                .add("currentTransport=" + currentTransport)
-                .add("currentLocation=" + currentLocation)
-                .add("energy=" + energy)
-                .add("invalidLocations=" + Arrays.toString(invalidLocations))
-                .toString();
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", currentTransport=" + currentTransport +
+                ", currentLocation=" + currentLocation +
+                ", energy=" + energy +
+                ", invalidLocations=" + Arrays.toString(invalidLocations) +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human human)) return false;
+        return energy == human.energy && Objects.equals(name, human.name) && Objects.equals(currentTransport, human.currentTransport) && currentLocation == human.currentLocation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, currentTransport, currentLocation, energy);
     }
 }

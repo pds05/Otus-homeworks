@@ -36,6 +36,7 @@ public class RoadMain {
         System.out.println(roverTransport);
 
         driver.takeTransport(roverTransport);
+        roverTransport.setDriver(driver);
         driver.info();
 
         if (!driver.ride(300)) {
