@@ -22,19 +22,19 @@ public class MainTask {
         return arr;
     }
 
-    public static void ckeckArray(String[][] arr) {
+    public static void checkArray(String[][] arr) {
         if (arr == null || arr.length != 4 || arr[0].length != 4) {
             throw new AppArraySizeException("Mismatch sizing array");
         }
     }
 
     public static int sumItemsOfArray(String[][] arr) {
-        ckeckArray(arr);
+        checkArray(arr);
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 try {
-                    int value = Integer.valueOf(arr[i][j]);
+                    int value = Integer.parseInt(arr[i][j]);
                     sum += value;
                 } catch (NumberFormatException e) {
                     throw new AppArrayDataException(i, j, "element not int");
@@ -57,8 +57,8 @@ public class MainTask {
     }
 
     static class AppArrayDataException extends RuntimeException {
-        private int line;
-        private int column;
+        private final int line;
+        private final int column;
 
         public AppArrayDataException(int line, int column, String msg) {
             super(msg);
