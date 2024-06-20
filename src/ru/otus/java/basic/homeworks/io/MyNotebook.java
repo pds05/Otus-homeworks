@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class MyNotebook {
-    private static final String PATH = ".\\";
+    private static final String PATH = "";
 
     public static void main(String[] args) {
         File[] files = readDir(PATH);
@@ -29,8 +30,8 @@ public class MyNotebook {
         scanner.close();
     }
 
-    public static File[] readDir(String path) {
-        File dir = new File(path);
+    public static File[] readDir(String homeDir) {
+        File dir = new File(Paths.get(homeDir).toAbsolutePath().toString());
         return dir.listFiles(pathname -> {
             String fileName = pathname.getName();
             if (pathname.isFile() && fileName.substring(fileName.length() - 4, fileName.length()).equals(".txt")) {
