@@ -1,9 +1,6 @@
 package ru.otus.java.basic.homeworks.io;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -15,26 +12,26 @@ public class MyNotebook {
         for (int i = 0; i < files.length; i++) {
             System.out.println(files[i].getName());
         }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введи имя файла:");
-        String fileName = scanner.nextLine();
+        try(Scanner scanner = new Scanner(System.in);) {
+            System.out.println("Введи имя файла:");
+            String fileName = scanner.nextLine();
 
-        File file = getFile(files, fileName);
-        readFile(file);
+            File file = getFile(files, fileName);
+            readFile(file);
 
-        System.out.println("Добавь текст в файл:");
-        String text = scanner.nextLine();
-        if (writeFile(file, "\r\n" + text)) {
-            System.out.println("Файл успешно обновлен.");
+            System.out.println("Добавь текст в файл:");
+            String text = scanner.nextLine();
+            if (writeFile(file, "\r\n" + text)) {
+                System.out.println("Файл успешно обновлен.");
+            }
         }
-        scanner.close();
     }
 
     public static File[] readDir(String homeDir) {
         File dir = new File(Paths.get(homeDir).toAbsolutePath().toString());
         return dir.listFiles(pathname -> {
             String fileName = pathname.getName();
-            if (pathname.isFile() && fileName.substring(fileName.length() - 4, fileName.length()).equals(".txt")) {
+            if (pathname.isFile() && fileName.endsWith(".txt")) {
                 return true;
             }
             return false;
@@ -51,13 +48,11 @@ public class MyNotebook {
     }
 
     public static void readFile(File file) {
-        try (FileReader reader = new FileReader(file)) {
-            int n = reader.read();
-            while (n != -1) {
-                System.out.print((char) n);
-                n = reader.read();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-            System.out.println();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
