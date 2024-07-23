@@ -38,24 +38,36 @@ public class GardenApp {
 
         Box<Apple> appleBox2 = new Box<>();
         appleBox2.put(new Apple(10));
+        System.out.println("коробка appleBox2 весит " + appleBox2.getBoxWeight());
+        System.out.println("пересыпаем коробку appleBox1 в appleBox2");
         appleBox2.move(appleBox1);
-        System.out.println("appleBox2 весит " + appleBox2.getBoxWeight());
+        System.out.println("коробка appleBox2 весит " + appleBox2.getBoxWeight());
+        System.out.println("коробка appleBox1 весит " + appleBox1.getBoxWeight());
         System.out.println("масса appleBox1 равна appleBox2 -" + appleBox1.compare(appleBox2));
 
         Box<Orange> orangeBox2 = new Box<>();
         orangeBox2.put(new Orange(10));
+        System.out.println("коробка orangeBox2 весит " + orangeBox2.getBoxWeight());
+        System.out.println("пересыпаем коробку orangeBox1 в orangeBox2");
         orangeBox2.move(orangeBox1);
-        System.out.println("orangeBox2 весит " + orangeBox2.getBoxWeight());
+        System.out.println("коробка orangeBox2 весит " + orangeBox2.getBoxWeight());
+        System.out.println("коробка orangeBox1 весит " + orangeBox1.getBoxWeight());
         System.out.println("масса orangeBox1 равна orangeBox2 -" + orangeBox1.compare(orangeBox2));
 
         Box<Fruit> fruitBox2 = new Box<>();
         fruitBox2.put(new Apple(10));
         fruitBox2.put(new Orange(10));
+        System.out.println("коробка fruitBox2 весит " + fruitBox2.getBoxWeight());
+        System.out.println("пересыпаем коробку fruitBox1 в fruitBox2");
         fruitBox2.move(fruitBox1);
-        System.out.println("fruitBox2 весит " + fruitBox2.getBoxWeight());
+        System.out.println("коробка fruitBox2 весит " + fruitBox2.getBoxWeight());
+        System.out.println("коробка fruitBox1 весит " + fruitBox1.getBoxWeight());
         System.out.println("масса fruitBox1 равна fruitBox2 -" + fruitBox1.compare(fruitBox2));
 
         System.out.println("масса appleBox1 равна orangeBox2 -" + appleBox1.compare(orangeBox2));
-        System.out.println("масса appleBox1 равна fruitBox1 -" + appleBox1.compare(fruitBox1));
+
+        System.out.println("добавляем в коробку appleBox2 еще Apple(10)");
+        appleBox2.put(new Apple(10));
+        System.out.println("масса appleBox2 равна fruitBox2 -" + appleBox2.compare(fruitBox2));
     }
 }
