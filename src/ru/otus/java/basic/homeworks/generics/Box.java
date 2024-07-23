@@ -28,7 +28,7 @@ public class Box<T extends Fruit> {
     }
 
     public boolean move(Box<T> box) {
-        if(box != this) {
+        if(box != null && box != this) {
             fruitsList.addAll(box.getFruits());
             box.getFruits().clear();
             return true;
