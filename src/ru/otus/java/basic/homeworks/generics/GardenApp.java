@@ -69,5 +69,9 @@ public class GardenApp {
         System.out.println("добавляем в коробку appleBox2 еще Apple(10)");
         appleBox2.put(new Apple(10));
         System.out.println("масса appleBox2 равна fruitBox2 -" + appleBox2.compare(fruitBox2));
+
+        fruitBox2.move(appleBox2); // в коробку с родительским Fruit можно пересыпать коробку с дочерним Apple
+        fruitBox2.move(orangeBox2); // или Orange
+        // appleBox2.move(orangeBox2) // но нельзя пересыпать между коробками с дочерними Apple и Orange между собой
     }
 }
