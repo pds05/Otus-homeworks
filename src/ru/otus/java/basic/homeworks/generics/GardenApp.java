@@ -40,7 +40,7 @@ public class GardenApp {
         appleBox2.put(new Apple(10));
         System.out.println("коробка appleBox2 весит " + appleBox2.getBoxWeight());
         System.out.println("пересыпаем коробку appleBox1 в appleBox2");
-        appleBox2.move(appleBox1);
+        appleBox1.move(appleBox2);
         System.out.println("коробка appleBox2 весит " + appleBox2.getBoxWeight());
         System.out.println("коробка appleBox1 весит " + appleBox1.getBoxWeight());
         System.out.println("масса appleBox1 равна appleBox2 -" + appleBox1.compare(appleBox2));
@@ -49,7 +49,7 @@ public class GardenApp {
         orangeBox2.put(new Orange(10));
         System.out.println("коробка orangeBox2 весит " + orangeBox2.getBoxWeight());
         System.out.println("пересыпаем коробку orangeBox1 в orangeBox2");
-        orangeBox2.move(orangeBox1);
+        orangeBox1.move(orangeBox2);
         System.out.println("коробка orangeBox2 весит " + orangeBox2.getBoxWeight());
         System.out.println("коробка orangeBox1 весит " + orangeBox1.getBoxWeight());
         System.out.println("масса orangeBox1 равна orangeBox2 -" + orangeBox1.compare(orangeBox2));
@@ -59,7 +59,7 @@ public class GardenApp {
         fruitBox2.put(new Orange(10));
         System.out.println("коробка fruitBox2 весит " + fruitBox2.getBoxWeight());
         System.out.println("пересыпаем коробку fruitBox1 в fruitBox2");
-        fruitBox2.move(fruitBox1);
+        fruitBox1.move(fruitBox2);
         System.out.println("коробка fruitBox2 весит " + fruitBox2.getBoxWeight());
         System.out.println("коробка fruitBox1 весит " + fruitBox1.getBoxWeight());
         System.out.println("масса fruitBox1 равна fruitBox2 -" + fruitBox1.compare(fruitBox2));
@@ -70,8 +70,8 @@ public class GardenApp {
         appleBox2.put(new Apple(10));
         System.out.println("масса appleBox2 равна fruitBox2 -" + appleBox2.compare(fruitBox2));
 
-        fruitBox2.move(appleBox2); // в коробку с родительским Fruit можно пересыпать коробку с дочерним Apple
-        fruitBox2.move(orangeBox2); // или Orange
-        // appleBox2.move(orangeBox2) // но нельзя пересыпать между коробками с дочерними Apple и Orange между собой
+        appleBox2.move(fruitBox2); // в коробку с родительским Fruit можно пересыпать коробку с дочерним Apple
+        orangeBox2.move(fruitBox2); // или Orange
+        //appleBox2.move(orangeBox2);// но нельзя пересыпать между коробками с дочерними Apple и Orange между собой
     }
 }

@@ -27,10 +27,10 @@ public class Box<T extends Fruit> {
         return this.getBoxWeight() == box.getBoxWeight();
     }
 
-    public boolean move(Box<? extends T> box) {
-        if(box != null && box != this) {
-            fruitsList.addAll(box.getFruits());
-            box.getFruits().clear();
+    public boolean move(Box<? super T> target) {
+        if(target != null && target != this) {
+            target.fruitsList.addAll(this.fruitsList);
+            fruitsList.clear();
             return true;
         }
         return false;
